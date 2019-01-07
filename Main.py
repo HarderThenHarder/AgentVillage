@@ -3,6 +3,7 @@ from pygame.locals import *
 from sys import exit
 from pygame.time import Clock
 from Vector2 import Vector2
+from World import World
 
 
 def main():
@@ -30,12 +31,15 @@ def main():
     screen = pygame.display.set_mode(WIDTH_HEIGHT, RESIZABLE, 32)
     start_draw_pos = Vector2(0, 0)
 
+    # Create world
+    world = World(world_bg, WIDTH_HEIGHT)
+
     while True:
         time_passed = clock.tick(30)
 
-        screen.blit(world_bg, start_draw_pos.get_xy())
-        screen.blit(tree_img, (start_draw_pos + Vector2(100, 100)).get_xy())
-        screen.blit(stone_img, (start_draw_pos + Vector2(300, 300)).get_xy())
+        # screen.blit(world_bg, start_draw_pos.get_xy())
+        # screen.blit(tree_img, (start_draw_pos + Vector2(100, 100)).get_xy())
+        # screen.blit(stone_img, (start_draw_pos + Vector2(300, 300)).get_xy())
 
         for event in pygame.event.get():
             if event.type == QUIT:
@@ -51,18 +55,19 @@ def main():
                 WIDTH_HEIGHT = event.size
 
         if pygame.mouse.get_pos()[0] <= 10:
-            if start_draw_pos.x + 50 <= 0:
-                start_draw_pos = start_draw_pos + Vector2(50, 0)
+            if start_draw_pos.x + 100 <= 0:
+                start_draw_pos = start_draw_pos + Vector2(100, 0)
         elif pygame.mouse.get_pos()[0] >= WIDTH_HEIGHT[0] - 10:
-            if start_draw_pos.x - 50 >= WIDTH_HEIGHT[0] - WHOLE_MAP_SIZE[0]:
-                start_draw_pos = start_draw_pos - Vector2(50, 0)
+            if start_draw_pos.x - 100 >= WIDTH_HEIGHT[0] - WHOLE_MAP_SIZE[0]:
+                start_draw_pos = start_draw_pos - Vector2(100, 0)
         if pygame.mouse.get_pos()[1] <= 10:
-            if start_draw_pos.y + 50 <= 0:
-                start_draw_pos = start_draw_pos + Vector2(0, 50)
+            if start_draw_pos.y + 100 <= 0:
+                start_draw_pos = start_draw_pos + Vector2(0, 100)
         elif pygame.mouse.get_pos()[1] >= WIDTH_HEIGHT[1] - 10:
-            if start_draw_pos.y - 50 >= WIDTH_HEIGHT[1] - WHOLE_MAP_SIZE[1]:
-                start_draw_pos = start_draw_pos - Vector2(0, 50)
+            if start_draw_pos.y - 100 >= WIDTH_HEIGHT[1] - WHOLE_MAP_SIZE[1]:
+                start_draw_pos = start_draw_pos - Vector2(0, 100)
 
+        world.render(screen, start_draw_pos.get_xy())
         pygame.display.update()
 
 
