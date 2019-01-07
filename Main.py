@@ -6,6 +6,7 @@ from Entity.Stone import Stone
 from Entity.Tree import Tree
 from Vector2 import Vector2
 from World import World
+from random import randint
 
 
 def main():
@@ -36,15 +37,29 @@ def main():
     # Create world
     world = World(world_bg, WIDTH_HEIGHT)
 
-    tree = Tree(world, tree_img, Vector2(500, 300))
-    world.add(tree)
-    tree = Tree(world, tree_img, Vector2(490, 320))
-    world.add(tree)
+    # tree = Tree(world, tree_img, Vector2(500, 300))
+    # world.add(tree)
+    # tree = Tree(world, tree_img, Vector2(490, 320))
+    # world.add(tree)
+    #
+    # stone= Stone(world, stone_img, Vector2(540, 340))
+    # world.add(stone)
+    # stone = Stone(world, stone_img, Vector2(550, 360))
+    # world.add(stone)
 
-    stone= Stone(world, stone_img, Vector2(540, 340))
-    world.add(stone)
-    stone = Stone(world, stone_img, Vector2(550, 360))
-    world.add(stone)
+    for i in range(100):
+        x = randint(100, WHOLE_MAP_SIZE[0] - 100)
+        y = randint(100, WHOLE_MAP_SIZE[1] - 100)
+        random_location = Vector2(x, y)
+        tree = Tree(world, tree_img, random_location)
+        world.add(tree)
+
+    for i in range(100):
+        x = randint(100, WHOLE_MAP_SIZE[0] - 100)
+        y = randint(100, WHOLE_MAP_SIZE[1] - 100)
+        random_location = Vector2(x, y)
+        stone = Stone(world, stone_img, random_location)
+        world.add(stone)
 
     while True:
         time_passed = clock.tick(30)
