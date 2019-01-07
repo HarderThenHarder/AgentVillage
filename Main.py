@@ -2,6 +2,8 @@ import pygame
 from pygame.locals import *
 from sys import exit
 from pygame.time import Clock
+from Entity.Stone import Stone
+from Entity.Tree import Tree
 from Vector2 import Vector2
 from World import World
 
@@ -34,12 +36,18 @@ def main():
     # Create world
     world = World(world_bg, WIDTH_HEIGHT)
 
+    tree = Tree(world, tree_img, Vector2(500, 300))
+    world.add(tree)
+    tree = Tree(world, tree_img, Vector2(490, 320))
+    world.add(tree)
+
+    stone= Stone(world, stone_img, Vector2(540, 340))
+    world.add(stone)
+    stone = Stone(world, stone_img, Vector2(550, 360))
+    world.add(stone)
+
     while True:
         time_passed = clock.tick(30)
-
-        # screen.blit(world_bg, start_draw_pos.get_xy())
-        # screen.blit(tree_img, (start_draw_pos + Vector2(100, 100)).get_xy())
-        # screen.blit(stone_img, (start_draw_pos + Vector2(300, 300)).get_xy())
 
         for event in pygame.event.get():
             if event.type == QUIT:
@@ -67,6 +75,7 @@ def main():
             if start_draw_pos.y - 100 >= WIDTH_HEIGHT[1] - WHOLE_MAP_SIZE[1]:
                 start_draw_pos = start_draw_pos - Vector2(0, 100)
 
+        world.process(start_draw_pos.get_xy())
         world.render(screen, start_draw_pos.get_xy())
         pygame.display.update()
 
