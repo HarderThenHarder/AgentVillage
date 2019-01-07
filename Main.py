@@ -2,6 +2,7 @@ import pygame
 from pygame.locals import *
 from sys import exit
 from pygame.time import Clock
+from Entity.Flower import Flower
 from Entity.Stone import Stone
 from Entity.Forest import Forest
 from Vector2 import Vector2
@@ -19,11 +20,11 @@ def main():
     clock = Clock()
 
     # set Img
-    world_bg = pygame.image.load(r"img\world2.jpg")
-    forest_img = pygame.image.load(r"img\forest.png")
-    forest_img = pygame.transform.scale(forest_img, (100, 60))
-    stone_img = pygame.image.load(r"img\stone.png")
-    stone_img = pygame.transform.scale(stone_img, (50, 50))
+    world_bg = pygame.image.load(r"img\world3.png")
+    forest_img = pygame.transform.scale(pygame.image.load(r"img\forest.png"), (150, 100))
+    stone_img = pygame.transform.scale(pygame.image.load(r"img\stone.png"), (80, 60))
+    flower_img = pygame.transform.scale(pygame.image.load(r"img\flower.png"), (30, 30))
+    berry_img = pygame.transform.scale(pygame.image.load(r"img\berry.png"), (50, 50))
 
     # Constant Value
     ORIGIN = (0, 0)
@@ -38,16 +39,6 @@ def main():
     # Create world
     world = World(world_bg, WIDTH_HEIGHT)
 
-    # tree = Tree(world, tree_img, Vector2(500, 300))
-    # world.add(tree)
-    # tree = Tree(world, tree_img, Vector2(490, 320))
-    # world.add(tree)
-    #
-    # stone= Stone(world, stone_img, Vector2(540, 340))
-    # world.add(stone)
-    # stone = Stone(world, stone_img, Vector2(550, 360))
-    # world.add(stone)
-
     for i in range(100):
         x = randint(100, WHOLE_MAP_SIZE[0] - 100)
         y = randint(100, WHOLE_MAP_SIZE[1] - 100)
@@ -55,12 +46,26 @@ def main():
         forest = Forest(world, forest_img, random_location)
         world.add(forest)
 
-    for i in range(100):
+    for i in range(50):
         x = randint(100, WHOLE_MAP_SIZE[0] - 100)
         y = randint(100, WHOLE_MAP_SIZE[1] - 100)
         random_location = Vector2(x, y)
         stone = Stone(world, stone_img, random_location)
         world.add(stone)
+
+    for i in range(20):
+        x = randint(100, WHOLE_MAP_SIZE[0] - 100)
+        y = randint(100, WHOLE_MAP_SIZE[1] - 100)
+        random_location = Vector2(x, y)
+        flower = Flower(world, flower_img, random_location)
+        world.add(flower)
+
+    for i in range(20):
+        x = randint(100, WHOLE_MAP_SIZE[0] - 100)
+        y = randint(100, WHOLE_MAP_SIZE[1] - 100)
+        random_location = Vector2(x, y)
+        berry = Flower(world, berry_img, random_location)
+        world.add(berry)
 
     while True:
         time_passed = clock.tick(30)
