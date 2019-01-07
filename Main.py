@@ -2,9 +2,12 @@ import pygame
 from pygame.locals import *
 from sys import exit
 from pygame.time import Clock
+
+from Entity.Farmer.Farmer import Farmer
 from Entity.Flower import Flower
 from Entity.Stone import Stone
 from Entity.Forest import Forest
+from ImageClass import ImageClass
 from Vector2 import Vector2
 from World import World
 from random import randint
@@ -20,52 +23,61 @@ def main():
     clock = Clock()
 
     # set Img
-    world_bg = pygame.image.load(r"img\world3.png")
-    forest_img = pygame.transform.scale(pygame.image.load(r"img\forest.png"), (150, 100))
-    stone_img = pygame.transform.scale(pygame.image.load(r"img\stone.png"), (80, 60))
-    flower_img = pygame.transform.scale(pygame.image.load(r"img\flower.png"), (30, 30))
-    berry_img = pygame.transform.scale(pygame.image.load(r"img\berry.png"), (50, 50))
+    image_class = ImageClass()
 
     # Constant Value
     ORIGIN = (0, 0)
 
     # set Screen
     WHOLE_MAP_SIZE = [9600, 5400]
-    # WIDTH_HEIGHT = [1536, 864]
-    WIDTH_HEIGHT = [1920, 1080]
+    WIDTH_HEIGHT = [1536, 864]
+    # WIDTH_HEIGHT = [1920, 1080]
     screen = pygame.display.set_mode(WIDTH_HEIGHT, RESIZABLE, 32)
     start_draw_pos = Vector2(0, 0)
 
     # Create world
-    world = World(world_bg, WIDTH_HEIGHT)
+    world = World(image_class.world_bg, WIDTH_HEIGHT)
 
+    # Create Forest
     for i in range(100):
         x = randint(100, WHOLE_MAP_SIZE[0] - 100)
         y = randint(100, WHOLE_MAP_SIZE[1] - 100)
         random_location = Vector2(x, y)
-        forest = Forest(world, forest_img, random_location)
+        forest = Forest(world, image_class.forest_img, random_location)
         world.add(forest)
 
+    # Create Stone
     for i in range(50):
         x = randint(100, WHOLE_MAP_SIZE[0] - 100)
         y = randint(100, WHOLE_MAP_SIZE[1] - 100)
         random_location = Vector2(x, y)
-        stone = Stone(world, stone_img, random_location)
+        stone = Stone(world, image_class.stone_img, random_location)
         world.add(stone)
 
+    # Create Flower
     for i in range(20):
         x = randint(100, WHOLE_MAP_SIZE[0] - 100)
         y = randint(100, WHOLE_MAP_SIZE[1] - 100)
         random_location = Vector2(x, y)
-        flower = Flower(world, flower_img, random_location)
+        flower = Flower(world, image_class.flower_img, random_location)
         world.add(flower)
 
+    # Create Berry
     for i in range(20):
         x = randint(100, WHOLE_MAP_SIZE[0] - 100)
         y = randint(100, WHOLE_MAP_SIZE[1] - 100)
         random_location = Vector2(x, y)
-        berry = Flower(world, berry_img, random_location)
+        berry = Flower(world, image_class.berry_img, random_location)
         world.add(berry)
+
+    # Create Farmer
+    for i in range(10):
+        x = randint(-50, 50)
+        y = randint(-50, 50)
+        random_location = Vector2(500, 500) + Vector2(x, y)
+        farmer = Farmer(world, image_class.farmer_lb_img, random_location)
+        farmer.brain.set_state("goCutting")
+        world.add(farmer)
 
     while True:
         time_passed = clock.tick(30)
@@ -82,6 +94,7 @@ def main():
 
             if event.type == VIDEORESIZE:
                 WIDTH_HEIGHT = event.size
+                screen = pygame.display.set_mode(WIDTH_HEIGHT, RESIZABLE, 32)
 
         # Use Mouse To Move Map
         if pygame.mouse.get_pos()[0] <= 10:
@@ -97,7 +110,7 @@ def main():
             if start_draw_pos.y - 100 >= WIDTH_HEIGHT[1] - WHOLE_MAP_SIZE[1]:
                 start_draw_pos = start_draw_pos - Vector2(0, 100)
 
-        world.process(start_draw_pos.get_xy())
+        world.process(start_draw_pos.get_xy(), WIDTH_HEIGHT, time_passed)
         world.render(screen, start_draw_pos.get_xy())
         pygame.display.update()
 

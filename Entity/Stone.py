@@ -4,7 +4,7 @@ from GameEntity import GameEntity
 class Stone(GameEntity):
 
     def __init__(self, world, stone_image, location):
-        GameEntity.__init__(self, "Stone", world, stone_image)
+        GameEntity.__init__(self, "stone", world, stone_image)
         self.location = location
         self.color = (100, 100, 100)
 

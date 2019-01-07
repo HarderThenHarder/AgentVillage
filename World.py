@@ -26,6 +26,9 @@ class World:
         entity.id = self.entity_id
         self.entity_id += 1
 
+    def remove(self, entity_id):
+        del self.entity_group[entity_id]
+
     def render(self, screen, start_draw_pos):
         screen.blit(self.world_bg, start_draw_pos)
         # Draw Entity
@@ -35,16 +38,34 @@ class World:
             if entity.color:
                 x, y = entity.location.get_xy()
                 entity_in_sub_map_rect = [int(x / 9600 * self.sub_map_width_height[0]),
-                                          self.WIDTH_HEIGHT[1] - self.sub_map_width_height[1] + int(y / 5400 * self.sub_map_width_height[1]), 3, 3]
+                                          self.WIDTH_HEIGHT[1] - self.sub_map_width_height[1] + int(
+                                              y / 5400 * self.sub_map_width_height[1]), 3, 3]
                 Pencil.draw_rect(screen, entity_in_sub_map_rect, entity.color)
         # Draw Sub Map
         screen.blit(self.sub_map_surface, (0, self.WIDTH_HEIGHT[1] - self.sub_map_width_height[1]))
         Pencil.draw_rect(screen, [*self.rect_in_sub_map_pos, *self.rect_in_sub_map_width_height], (200, 200, 200), 1)
 
-    def process(self, start_draw_pos):
+    def process(self, start_draw_pos, WIDTH_HEIGHT, time_passed):
         # Update the rect pos in sub map
         self.rect_in_sub_map_width_height = [self.WIDTH_HEIGHT[0] / 9600 * self.sub_map_width_height[0],
                                              self.WIDTH_HEIGHT[1] / 5400 * self.sub_map_width_height[1]]
         self.rect_in_sub_map_pos = [int(abs(start_draw_pos[0]) / 9600 * self.sub_map_width_height[0]),
-                                    self.WIDTH_HEIGHT[1] - self.sub_map_width_height[1] + int(abs(start_draw_pos[1]) / 5400 * self.sub_map_width_height[1])]
+                                    self.WIDTH_HEIGHT[1] - self.sub_map_width_height[1] + int(
+                                        abs(start_draw_pos[1]) / 5400 * self.sub_map_width_height[1])]
+        self.WIDTH_HEIGHT = WIDTH_HEIGHT
 
+        time_passed = time_passed
+        for entity in list(self.entity_group.values()):
+            entity.process(time_passed)
+
+    def get_nearest_entity(self, location, name):
+        location = location.copy()
+        nearest_entity = None
+        min_d = 9999999
+        for entity in self.entity_group.values():
+            if entity.name == name:
+                distance = abs(entity.location - location)
+                if distance < min_d:
+                    min_d = distance
+                    nearest_entity = entity
+        return nearest_entity
