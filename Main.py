@@ -3,7 +3,7 @@ from pygame.locals import *
 from sys import exit
 from pygame.time import Clock
 from Entity.Stone import Stone
-from Entity.Tree import Tree
+from Entity.Forest import Forest
 from Vector2 import Vector2
 from World import World
 from random import randint
@@ -20,8 +20,8 @@ def main():
 
     # set Img
     world_bg = pygame.image.load(r"img\world2.jpg")
-    tree_img = pygame.image.load(r"img\tree.png")
-    tree_img = pygame.transform.scale(tree_img, (50, 50))
+    forest_img = pygame.image.load(r"img\forest.png")
+    forest_img = pygame.transform.scale(forest_img, (100, 60))
     stone_img = pygame.image.load(r"img\stone.png")
     stone_img = pygame.transform.scale(stone_img, (50, 50))
 
@@ -30,7 +30,8 @@ def main():
 
     # set Screen
     WHOLE_MAP_SIZE = [9600, 5400]
-    WIDTH_HEIGHT = [1536, 864]
+    # WIDTH_HEIGHT = [1536, 864]
+    WIDTH_HEIGHT = [1920, 1080]
     screen = pygame.display.set_mode(WIDTH_HEIGHT, RESIZABLE, 32)
     start_draw_pos = Vector2(0, 0)
 
@@ -51,8 +52,8 @@ def main():
         x = randint(100, WHOLE_MAP_SIZE[0] - 100)
         y = randint(100, WHOLE_MAP_SIZE[1] - 100)
         random_location = Vector2(x, y)
-        tree = Tree(world, tree_img, random_location)
-        world.add(tree)
+        forest = Forest(world, forest_img, random_location)
+        world.add(forest)
 
     for i in range(100):
         x = randint(100, WHOLE_MAP_SIZE[0] - 100)
@@ -77,6 +78,7 @@ def main():
             if event.type == VIDEORESIZE:
                 WIDTH_HEIGHT = event.size
 
+        # Use Mouse To Move Map
         if pygame.mouse.get_pos()[0] <= 10:
             if start_draw_pos.x + 100 <= 0:
                 start_draw_pos = start_draw_pos + Vector2(100, 0)

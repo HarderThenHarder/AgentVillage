@@ -28,15 +28,16 @@ class World:
 
     def render(self, screen, start_draw_pos):
         screen.blit(self.world_bg, start_draw_pos)
-        screen.blit(self.sub_map_surface, (0, self.WIDTH_HEIGHT[1] - self.sub_map_width_height[1]))
-        Pencil.draw_rect(screen, [*self.rect_in_sub_map_pos, *self.rect_in_sub_map_width_height], (200, 200, 200), 1)
-
+        # Draw Entity
         for entity in self.entity_group.values():
             entity.render(screen, start_draw_pos)
             x, y = entity.location.get_xy()
             entity_in_sub_map_rect = [int(x / 9600 * self.sub_map_width_height[0]),
                                       self.WIDTH_HEIGHT[1] - self.sub_map_width_height[1] + int(y / 5400 * self.sub_map_width_height[1]), 3, 3]
             Pencil.draw_rect(screen, entity_in_sub_map_rect, entity.color)
+        # Draw Sub Map
+        screen.blit(self.sub_map_surface, (0, self.WIDTH_HEIGHT[1] - self.sub_map_width_height[1]))
+        Pencil.draw_rect(screen, [*self.rect_in_sub_map_pos, *self.rect_in_sub_map_width_height], (200, 200, 200), 1)
 
     def process(self, start_draw_pos):
         # Update the rect pos in sub map
