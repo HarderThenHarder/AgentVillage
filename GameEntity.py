@@ -1,6 +1,5 @@
 from Vector2 import Vector2
 from StateMachine import StateMachine
-import pygame
 
 
 class GameEntity:
@@ -13,8 +12,7 @@ class GameEntity:
         self.destination = Vector2(0, 0)
         self.brain = StateMachine()
         self.id = 0
-        self.right_image = image
-        self.left_image = pygame.transform.flip(self.image, 1, 0)
+        self.main_tower = None
 
     def render(self, surface, start_draw_pos):
         x = self.location.x

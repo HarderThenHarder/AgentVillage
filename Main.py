@@ -7,7 +7,7 @@ from Entity.Farmer.Farmer import Farmer
 from Entity.Flower import Flower
 from Entity.Stone import Stone
 from Entity.Forest import Forest
-from Entity.Village import Village
+from Entity.Building.MainTower import MainTower
 from ImageClass import ImageClass
 from Vector2 import Vector2
 from World import World
@@ -31,8 +31,8 @@ def main():
 
     # set Screen
     WHOLE_MAP_SIZE = [9600, 5400]
-    WIDTH_HEIGHT = [1536, 864]
-    # WIDTH_HEIGHT = [1920, 1080]
+    # WIDTH_HEIGHT = [1536, 864]
+    WIDTH_HEIGHT = [1920, 1080]
     screen = pygame.display.set_mode(WIDTH_HEIGHT, RESIZABLE, 32)
     start_draw_pos = Vector2(0, 0)
 
@@ -71,15 +71,16 @@ def main():
         berry = Flower(world, image_class.berry_img, random_location)
         world.add(berry)
 
-    village = Village(world, image_class.village_img, Vector2(500, 500))
-    world.add(village)
+    main_tower = MainTower(world, image_class.village_img, Vector2(500, 500))
+    world.add(main_tower)
 
     # Create Farmer
     for i in range(10):
         x = randint(-50, 50)
         y = randint(-50, 50)
-        random_location = village.location + Vector2(x, y)
-        farmer = Farmer(world, image_class.farmer_lb_img, random_location, village)
+        random_location = main_tower.location + Vector2(x, y)
+        farmer = Farmer(world, image_class.farmer_lb_img, random_location)
+        main_tower.add(farmer)
         farmer.brain.set_state("goCutting")
         world.add(farmer)
 
