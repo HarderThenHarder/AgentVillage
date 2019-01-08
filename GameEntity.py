@@ -26,11 +26,6 @@ class GameEntity:
         time_passed_second = time_passed / 1000
         self.brain.think()
         if self.destination != self.location:
-            # Set walk to left or right Image
-            if self.destination.x < self.location.x:
-                self.image = self.left_image
-            else:
-                self.image = self.right_image
             vec_to_destination = self.destination - self.location
             distance_to_destination = abs(vec_to_destination)
             heading = vec_to_destination.normalization()

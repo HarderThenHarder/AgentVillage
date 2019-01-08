@@ -1,11 +1,10 @@
 from Pencil import Pencil
 import pygame
-from Vector2 import Vector2
 
 
 class World:
 
-    def __init__(self, world_bg, WIDTH_HEIGHT):
+    def __init__(self, world_bg, WIDTH_HEIGHT, image_class):
         self.world_bg = world_bg
         self.entity_group = {}
         self.entity_id = 0
@@ -14,6 +13,7 @@ class World:
         self.sub_map_surface = self.set_sub_map()
         self.rect_in_sub_map_width_height = []
         self.rect_in_sub_map_pos = []
+        self.image_class = image_class
 
     def set_sub_map(self):
         sub_map_surface = pygame.Surface(self.sub_map_width_height)
@@ -31,8 +31,10 @@ class World:
 
     def render(self, screen, start_draw_pos):
         screen.blit(self.world_bg, start_draw_pos)
-        # Draw Entity
-        for entity in self.entity_group.values():
+
+        # Draw Entity && sort the entity by their y position
+        for tuple_element in sorted(self.entity_group.items(), key=lambda item: item[1].location.get_xy()[1]):
+            entity = tuple_element[1]
             entity.render(screen, start_draw_pos)
             # draw entity on sub map
             if entity.color:

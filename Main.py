@@ -7,6 +7,7 @@ from Entity.Farmer.Farmer import Farmer
 from Entity.Flower import Flower
 from Entity.Stone import Stone
 from Entity.Forest import Forest
+from Entity.Village import Village
 from ImageClass import ImageClass
 from Vector2 import Vector2
 from World import World
@@ -36,7 +37,7 @@ def main():
     start_draw_pos = Vector2(0, 0)
 
     # Create world
-    world = World(image_class.world_bg, WIDTH_HEIGHT)
+    world = World(image_class.world_bg, WIDTH_HEIGHT, image_class)
 
     # Create Forest
     for i in range(100):
@@ -70,12 +71,15 @@ def main():
         berry = Flower(world, image_class.berry_img, random_location)
         world.add(berry)
 
+    village = Village(world, image_class.village_img, Vector2(500, 500))
+    world.add(village)
+
     # Create Farmer
     for i in range(10):
         x = randint(-50, 50)
         y = randint(-50, 50)
-        random_location = Vector2(500, 500) + Vector2(x, y)
-        farmer = Farmer(world, image_class.farmer_lb_img, random_location)
+        random_location = village.location + Vector2(x, y)
+        farmer = Farmer(world, image_class.farmer_lb_img, random_location, village)
         farmer.brain.set_state("goCutting")
         world.add(farmer)
 
