@@ -11,6 +11,7 @@ class Farmer(GameEntity):
         self.color = (200, 0, 0)
         self.brain = StateMachine()
         self.forest_id = None
+        self.stone_id = None
         self.max_bear_load = 10
         self.bear_load = self.max_bear_load
         stateGoCutting = FarmerStateGoCutting(self)

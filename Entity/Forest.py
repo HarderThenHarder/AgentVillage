@@ -24,4 +24,4 @@ class Forest(GameEntity):
             # surface.fill((0, 150, 0), (bar_x, bar_y, self.wood / self.max_wood * bar_w, bar_h))
             text_x = x - 20
             text_y = y + h // 2
-            Pencil.write_text(surface, "%3d/500" % self.wood, [text_x, text_y], 10, color=(200, 200, 200))
+            Pencil.write_text(surface, "%3d/5%3d" % (self.wood, self.max_wood), [text_x, text_y], 10, color=(200, 200, 200))

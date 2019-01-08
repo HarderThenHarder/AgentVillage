@@ -2,16 +2,10 @@ import pygame
 from pygame.locals import *
 from sys import exit
 from pygame.time import Clock
-
-from Entity.Farmer.Farmer import Farmer
-from Entity.Flower import Flower
-from Entity.Stone import Stone
-from Entity.Forest import Forest
-from Entity.Building.MainTower import MainTower
+from Entity.AreaConfig import AreaConfig
 from ImageClass import ImageClass
 from Vector2 import Vector2
 from World import World
-from random import randint
 
 
 def main():
@@ -39,50 +33,8 @@ def main():
     # Create world
     world = World(image_class.world_bg, WIDTH_HEIGHT, image_class)
 
-    # Create Forest
-    for i in range(100):
-        x = randint(100, WHOLE_MAP_SIZE[0] - 100)
-        y = randint(100, WHOLE_MAP_SIZE[1] - 100)
-        random_location = Vector2(x, y)
-        forest = Forest(world, image_class.forest_img, random_location)
-        world.add(forest)
-
-    # Create Stone
-    for i in range(50):
-        x = randint(100, WHOLE_MAP_SIZE[0] - 100)
-        y = randint(100, WHOLE_MAP_SIZE[1] - 100)
-        random_location = Vector2(x, y)
-        stone = Stone(world, image_class.stone_img, random_location)
-        world.add(stone)
-
-    # Create Flower
-    for i in range(20):
-        x = randint(100, WHOLE_MAP_SIZE[0] - 100)
-        y = randint(100, WHOLE_MAP_SIZE[1] - 100)
-        random_location = Vector2(x, y)
-        flower = Flower(world, image_class.flower_img, random_location)
-        world.add(flower)
-
-    # Create Berry
-    for i in range(20):
-        x = randint(100, WHOLE_MAP_SIZE[0] - 100)
-        y = randint(100, WHOLE_MAP_SIZE[1] - 100)
-        random_location = Vector2(x, y)
-        berry = Flower(world, image_class.berry_img, random_location)
-        world.add(berry)
-
-    main_tower = MainTower(world, image_class.village_img, Vector2(500, 500))
-    world.add(main_tower)
-
-    # Create Farmer
-    for i in range(10):
-        x = randint(-50, 50)
-        y = randint(-50, 50)
-        random_location = main_tower.location + Vector2(x, y)
-        farmer = Farmer(world, image_class.farmer_lb_img, random_location)
-        main_tower.add(farmer)
-        farmer.brain.set_state("goCutting")
-        world.add(farmer)
+    # Create area_config to init the world
+    area_config = AreaConfig(world, WHOLE_MAP_SIZE, image_class)
 
     while True:
         time_passed = clock.tick(30)
