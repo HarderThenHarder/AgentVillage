@@ -4,7 +4,7 @@ import pygame
 class ImageClass:
 
     def __init__(self):
-        self.world_bg = pygame.image.load(r"img\world3.png")
+        self.world_bg = pygame.transform.scale(pygame.image.load(r"img\world3.png"), (9600, 5400))
         self.forest_img = pygame.transform.scale(pygame.image.load(r"img\forest.png"), (150, 100))
         self.stone_img = pygame.transform.scale(pygame.image.load(r"img\stone.png"), (80, 60))
         self.flower_img = pygame.transform.scale(pygame.image.load(r"img\flower.png"), (30, 30))

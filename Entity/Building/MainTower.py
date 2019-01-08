@@ -10,6 +10,8 @@ class MainTower(GameEntity):
         self.color = (200, 0, 200)
         self.village_object_group_list = []
         self.wood = 0
+        self.mine = 0
+        self.food = 0
 
     def add(self, entity):
         self.village_object_group_list.append(entity)
@@ -22,3 +24,5 @@ class MainTower(GameEntity):
         text_x = x + w // 2
         text_y = y - h // 2
         Pencil.write_text(surface, "wood:%d" % self.wood, [text_x, text_y], 13, color=(200, 200, 200))
+        Pencil.write_text(surface, "food:%d" % self.food, [text_x, text_y + 13], 13, color=(200, 200, 200))
+        Pencil.write_text(surface, "mine:%d" % self.mine, [text_x, text_y + 26], 13, color=(200, 200, 200))
