@@ -11,6 +11,7 @@ class ImageClass:
         self.berry_img = pygame.transform.scale(pygame.image.load(r"img\berry.png"), (50, 50))
         self.house_img = pygame.transform.scale(pygame.image.load(r"img\house.png"), (120, 100))
 
+        # farmer
         self.farmer_lb_img = pygame.transform.scale(pygame.image.load(r"img\farmer\farmer_lb.png"), (30, 30))
         self.farmer_lu_img = pygame.transform.scale(pygame.image.load(r"img\farmer\farmer_lu.png"), (30, 30))
         self.farmer_ru_img = pygame.transform.scale(pygame.image.load(r"img\farmer\farmer_ru.png"), (30, 30))
@@ -20,6 +21,12 @@ class ImageClass:
         self.farmer_lu_full_img = pygame.transform.scale(pygame.image.load(r"img\farmer\farmer_lu_full.png"), (30, 30))
         self.farmer_ru_full_img = pygame.transform.scale(pygame.image.load(r"img\farmer\farmer_ru_full.png"), (30, 30))
         self.farmer_work_img = pygame.transform.scale(pygame.image.load(r"img\farmer\farmer_work.png"), (30, 30))
+
+        # soldier
+        self.soldier_lb_img = pygame.transform.scale(pygame.image.load(r"img\soldier\soldier_lb.png"), (40, 40))
+        self.soldier_lu_img = pygame.transform.scale(pygame.image.load(r"img\soldier\soldier_lu.png"), (40, 40))
+        self.soldier_rb_img = pygame.transform.scale(pygame.image.load(r"img\soldier\soldier_rb.png"), (40, 40))
+        self.soldier_ru_img = pygame.transform.scale(pygame.image.load(r"img\soldier\soldier_ru.png"), (40, 40))
 
         self.main_tower_img = pygame.transform.scale(pygame.image.load(r"img\tower.png"), (60, 100))
 

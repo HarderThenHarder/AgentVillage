@@ -5,6 +5,7 @@ from Entity.Building.MainTower import MainTower
 from Entity.Farmer.Farmer import Farmer
 from Entity.Flower import Flower
 from Entity.Forest import Forest
+from Entity.Sodier.Sodier import Soldier
 from Entity.Stone import Stone
 from Vector2 import Vector2
 
@@ -59,3 +60,13 @@ class AreaConfig:
             main_tower.add(farmer)
             farmer.brain.set_state("goCutting")
             world.add(farmer)
+
+        # Create Soldier
+        for i in range(5):
+            x = randint(-50, 50)
+            y = randint(-50, 50)
+            random_location = main_tower.location + Vector2(x, y)
+            soldier = Soldier(world, image_class.soldier_rb_img, random_location)
+            main_tower.add(soldier)
+            # farmer.brain.set_state("goCutting")
+            world.add(soldier)
