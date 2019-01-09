@@ -29,7 +29,7 @@ class FarmerStateGoCutting(State):
         return None
 
     def entry_action(self):
-        self.farmer.speed = 60
+        self.farmer.speed = 40
         # 50% probability cut tree - cut mine
         if randint(1, 10) <= 5:
             forest = self.farmer.world.get_nearest_entity(self.farmer.location, "forest")

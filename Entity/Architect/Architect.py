@@ -1,17 +1,17 @@
-from Entity.Sodier.SoldierState import SoldierStatePatrol
+from Entity.Architect.ArchitectState import ArchitectStateFree
 from GameEntity import GameEntity
 from StateMachine import StateMachine
 
 
-class Soldier(GameEntity):
+class Architect(GameEntity):
 
-    def __init__(self, world, soldier_image, location):
-        GameEntity.__init__(self, "soldier", world, soldier_image)
+    def __init__(self, world, architect_image, location):
+        GameEntity.__init__(self, "architect", world, architect_image)
         self.location = location
         self.color = (200, 0, 0)
         self.brain = StateMachine()
-        statePatrol = SoldierStatePatrol(self)
-        self.brain.add_state(statePatrol)
+        stateFree = ArchitectStateFree(self)
+        self.brain.add_state(stateFree)
         self.time_passed = 0
         self.main_tower = None
 

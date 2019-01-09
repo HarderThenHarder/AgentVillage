@@ -12,6 +12,7 @@ class MainTower(GameEntity):
         self.wood = 0
         self.mine = 0
         self.food = 0
+        self.territory_R = 300
 
     def add(self, entity):
         self.village_object_group_list.append(entity)
@@ -26,3 +27,6 @@ class MainTower(GameEntity):
         Pencil.write_text(surface, "wood:%d" % self.wood, [text_x, text_y], 13, color=(200, 200, 200))
         Pencil.write_text(surface, "food:%d" % self.food, [text_x, text_y + 13], 13, color=(200, 200, 200))
         Pencil.write_text(surface, "mine:%d" % self.mine, [text_x, text_y + 26], 13, color=(200, 200, 200))
+        # Pencil.draw_rect(surface, [start_draw_pos[0] + self.location.get_xy()[0] - self.territory_R,
+        #                            start_draw_pos[1] + self.location.get_xy()[1] - self.territory_R,
+        #                            2 * self.territory_R, 2 * self.territory_R], (150, 150, 150), 1)

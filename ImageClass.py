@@ -28,6 +28,13 @@ class ImageClass:
         self.soldier_rb_img = pygame.transform.scale(pygame.image.load(r"img\soldier\soldier_rb.png"), (40, 40))
         self.soldier_ru_img = pygame.transform.scale(pygame.image.load(r"img\soldier\soldier_ru.png"), (40, 40))
 
+        # architect
+        self.architect_lb_img = pygame.transform.scale(pygame.image.load(r"img\architect\architect_lb.png"), (30, 30))
+        self.architect_lu_img = pygame.transform.scale(pygame.image.load(r"img\architect\architect_lu.png"), (30, 30))
+        self.architect_rb_img = pygame.transform.scale(pygame.image.load(r"img\architect\architect_rb.png"), (30, 30))
+        self.architect_ru_img = pygame.transform.scale(pygame.image.load(r"img\architect\architect_ru.png"), (30, 30))
+
+        # main tower
         self.main_tower_img = pygame.transform.scale(pygame.image.load(r"img\tower.png"), (60, 100))
 
 
