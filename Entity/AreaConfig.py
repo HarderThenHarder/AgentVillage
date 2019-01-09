@@ -356,8 +356,8 @@ class AreaConfig:
         main_tower = MainTower(world, image_class.main_tower_img, Vector2(500, 500))
         world.add(main_tower)
 
-        house = House(world, image_class.house_img, Vector2(600, 650))
-        world.add(house)
+        # house = House(world, image_class.house_img, Vector2(600, 650))
+        # world.add(house)
 
         # Create Farmer
         for i in range(10):

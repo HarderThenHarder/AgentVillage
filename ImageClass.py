@@ -10,6 +10,7 @@ class ImageClass:
         self.flower_img = pygame.transform.scale(pygame.image.load(r"img\flower.png"), (30, 30))
         self.berry_img = pygame.transform.scale(pygame.image.load(r"img\berry.png"), (50, 50))
         self.house_img = pygame.transform.scale(pygame.image.load(r"img\house.png"), (150, 120))
+        self.house_unfinished_img = pygame.transform.scale(pygame.image.load(r"img\house_unfinished.png"), (150, 120))
 
         # farmer
         self.farmer_lb_img = pygame.transform.scale(pygame.image.load(r"img\farmer\farmer_lb.png"), (30, 30))
@@ -33,6 +34,7 @@ class ImageClass:
         self.architect_lu_img = pygame.transform.scale(pygame.image.load(r"img\architect\architect_lu.png"), (30, 30))
         self.architect_rb_img = pygame.transform.scale(pygame.image.load(r"img\architect\architect_rb.png"), (30, 30))
         self.architect_ru_img = pygame.transform.scale(pygame.image.load(r"img\architect\architect_ru.png"), (30, 30))
+        self.architect_work_img = pygame.transform.scale(pygame.image.load(r"img\architect\architect_work.png"), (30, 30))
 
         # main tower
         self.main_tower_img = pygame.transform.scale(pygame.image.load(r"img\tower.png"), (60, 100))

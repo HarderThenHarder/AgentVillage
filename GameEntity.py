@@ -29,3 +29,11 @@ class GameEntity:
             heading = vec_to_destination.normalization()
             shifting_distance = min(distance_to_destination, self.speed * time_passed_second)
             self.location += heading * shifting_distance
+
+    def is_over(self, other_location):
+        x = self.location.x
+        y = self.location.y
+        w, h = self.image.get_size()
+        if (x - w / 2) < other_location.x < (x + w / 2) and (y - h / 2) < other_location.y < (y + h / 2):
+            return True
+        return False

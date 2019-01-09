@@ -14,7 +14,7 @@ class SoldierStatePatrol(State):
         edge_area = [randint(-self.soldier.main_tower.territory_R, -self.soldier.main_tower.territory_R + 30),
                      randint(self.soldier.main_tower.territory_R - 30, self.soldier.main_tower.territory_R)]
         x = edge_area[randint(0, 1)]
-        y =  edge_area[randint(0, 1)]
+        y = edge_area[randint(0, 1)]
         self.soldier.destination = Vector2(x, y) + self.soldier.main_tower.location
 
     def do_action(self):

@@ -1,4 +1,4 @@
-from Entity.Architect.ArchitectState import ArchitectStateFree
+from Entity.Architect.ArchitectState import ArchitectStateFree, ArchitectStateGoBuilding, ArchitectStateBuilding
 from GameEntity import GameEntity
 from StateMachine import StateMachine
 
@@ -11,9 +11,15 @@ class Architect(GameEntity):
         self.color = (200, 0, 0)
         self.brain = StateMachine()
         stateFree = ArchitectStateFree(self)
+        stateGoBuilding = ArchitectStateGoBuilding(self)
+        stateBuilding = ArchitectStateBuilding(self)
         self.brain.add_state(stateFree)
+        self.brain.add_state(stateGoBuilding)
+        self.brain.add_state(stateBuilding)
         self.time_passed = 0
         self.main_tower = None
+        self.new_house = None
+        self.build_process = 0
 
     def render(self, surface, start_draw_pos):
         GameEntity.render(self, surface, start_draw_pos)
