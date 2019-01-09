@@ -34,7 +34,7 @@ class ArchitectStateFree(State):
     def check_condition(self):
         house_number = self.architect.main_tower.get_building_entity_number("house")
         # house capacity is 10, need 500 wood & 200 stone to build house
-        if house_number * 10 < len(self.architect.main_tower.people_list) and self.architect.main_tower.wood >= 500 and self.architect.main_tower.mine >= 200:
+        if house_number * 10 < len(self.architect.main_tower.people_list) and self.architect.main_tower.wood >= 200 and self.architect.main_tower.mine >= 200:
             return "goBuilding"
         return None
 
@@ -65,7 +65,7 @@ class ArchitectStateGoBuilding(State):
                     continue
             break
         new_house = House(self.architect.world, self.architect.world.image_class.house_unfinished_img, new_house_location)
-        self.architect.main_tower.wood -= 500
+        self.architect.main_tower.wood -= 200
         self.architect.main_tower.mine -= 200
         self.architect.world.add(new_house)
         self.architect.main_tower.add_building(new_house)
@@ -95,3 +95,4 @@ class ArchitectStateBuilding(State):
     def exit_action(self):
         self.architect.new_house.image = self.architect.world.image_class.house_img
         self.architect.new_house = None
+        self.architect.build_process = 0

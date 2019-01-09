@@ -1,5 +1,6 @@
 from GameEntity import GameEntity
 from Pencil import Pencil
+from Trigger import Trigger
 
 
 class MainTower(GameEntity):
@@ -10,8 +11,8 @@ class MainTower(GameEntity):
         self.color = (200, 0, 200)
         self.people_list = []
         self.building_list = []
-        self.wood = 0
-        self.mine = 0
+        self.wood = 1000
+        self.mine = 1000
         self.food = 0
         self.territory_R = 300
 
@@ -29,6 +30,10 @@ class MainTower(GameEntity):
             if entity.name == name:
                 number += 1
         return number
+
+    def process(self, time_passed):
+        GameEntity.process(self, time_passed)
+        Trigger.strike_add_people_event(self, self.world)
 
     def render(self, surface, start_draw_pos):
         GameEntity.render(self, surface, start_draw_pos)
