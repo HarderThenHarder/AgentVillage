@@ -39,4 +39,3 @@ class ImageClass:
         # main tower
         self.main_tower_img = pygame.transform.scale(pygame.image.load(r"img\tower.png"), (60, 100))
 
-
