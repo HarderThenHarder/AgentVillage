@@ -6,6 +6,7 @@ from Entity.AreaConfig import AreaConfig
 from ImageClass import ImageClass
 from Vector2 import Vector2
 from World import World
+import os
 
 
 def main():
@@ -27,6 +28,7 @@ def main():
     WHOLE_MAP_SIZE = [9600, 5400]
     # WIDTH_HEIGHT = [1536, 864]
     WIDTH_HEIGHT = [1920, 1080]
+    os.environ['SDL_VIDEO_WINDOW_POS'] = "%d, %d" % (100, 50)
     screen = pygame.display.set_mode(WIDTH_HEIGHT, RESIZABLE, 32)
     start_draw_pos = Vector2(0, 0)
 
