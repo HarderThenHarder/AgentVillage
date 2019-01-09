@@ -8,14 +8,19 @@ class MainTower(GameEntity):
         GameEntity.__init__(self, "village", world, tree_image)
         self.location = location
         self.color = (200, 0, 200)
-        self.village_object_group_list = []
+        self.main_tower_people_group_list = []
+        self.main_tower_building_group_list = []
         self.wood = 0
         self.mine = 0
         self.food = 0
         self.territory_R = 300
 
     def add(self, entity):
-        self.village_object_group_list.append(entity)
+        self.main_tower_people_group_list.append(entity)
+        entity.main_tower = self
+
+    def add_building(self, entity):
+        self.main_tower_building_group_list.append(entity)
         entity.main_tower = self
 
     def render(self, surface, start_draw_pos):
