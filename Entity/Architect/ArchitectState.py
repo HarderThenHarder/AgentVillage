@@ -34,7 +34,7 @@ class ArchitectStateFree(State):
     def check_condition(self):
         house_number = self.architect.main_tower.get_building_entity_number("house")
         # house capacity is 10, need 500 wood & 200 stone to build house
-        if house_number * 10 < len(self.architect.main_tower.people_list) and self.architect.main_tower.wood > 10 and self.architect.main_tower.mine > 10:
+        if house_number * 10 < len(self.architect.main_tower.people_list) and self.architect.main_tower.wood >= 500 and self.architect.main_tower.mine >= 200:
             return "goBuilding"
         return None
 

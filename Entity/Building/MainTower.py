@@ -10,8 +10,8 @@ class MainTower(GameEntity):
         self.color = (200, 0, 200)
         self.people_list = []
         self.building_list = []
-        self.wood = 0
-        self.mine = 0
+        self.wood = 500
+        self.mine = 200
         self.food = 0
         self.territory_R = 300
 
