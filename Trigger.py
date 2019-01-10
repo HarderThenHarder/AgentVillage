@@ -1,6 +1,7 @@
 from random import randint
 
 from Entity.Architect.Architect import Architect
+from Entity.Chef.Chef import Chef
 from Entity.Farmer.Farmer import Farmer
 from Entity.Sodier.Sodier import Soldier
 from Vector2 import Vector2
@@ -34,7 +35,7 @@ class Trigger:
                     main_tower.add(farmer)
                     farmer.brain.set_state("goCutting")
                     world.add(farmer)
-                if random_occupation <= 100:
+                elif random_occupation <= 90:
                     x = randint(-50, 50)
                     y = randint(-50, 50)
                     random_location = main_tower.location + Vector2(x, y)
@@ -42,11 +43,19 @@ class Trigger:
                     main_tower.add(soldier)
                     soldier.brain.set_state("patrol")
                     world.add(soldier)
+                elif random_occupation <= 100:
+                    x = randint(-50, 50)
+                    y = randint(-50, 50)
+                    random_location = main_tower.location + Vector2(x, y)
+                    chef = Chef(world, world.image_class.chef_rb_img, random_location)
+                    main_tower.add(chef)
+                    chef.brain.set_state("patrol")
+                    world.add(chef)
 
     @staticmethod
     def strike_hungry_people_event(main_tower, world):
         if main_tower.food == 0:
-            if randint(1, 50) == 1:
+            if randint(1, 20) == 1:
                 random_idx = randint(0, len(main_tower.people_list) - 1)
                 dead_people = main_tower.people_list[random_idx]
                 world.remove(dead_people.id)

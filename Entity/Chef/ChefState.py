@@ -36,8 +36,9 @@ class ChefStateFree(State):
                 self.chef.image = self.chef.world.image_class.chef_lu_img
 
     def check_condition(self):
-        # food less than 200, go to plant
-        if self.chef.main_tower.food < 200:
+        # 10 people need one farmland
+        farm_land_number = self.chef.main_tower.get_building_entity_number("planting")
+        if farm_land_number < len(self.chef.main_tower.people_list) // 10:
             x_offset = randint(-self.chef.main_tower.territory_left, self.chef.main_tower.territory_right)
             y_offset = randint(-self.chef.main_tower.territory_bottom, self.chef.main_tower.territory_up)
             new_farmland_location = Vector2(x_offset, y_offset) + self.chef.main_tower.location
@@ -79,6 +80,18 @@ class ChefStateGoPlanting(State):
     def __init__(self, chef):
         State.__init__(self, "goPlanting")
         self.chef = chef
+
+    def do_action(self):
+        if self.chef.location.get_xy()[0] < self.chef.destination.get_xy()[0]:
+            if self.chef.location.get_xy()[1] < self.chef.destination.get_xy()[1]:
+                self.chef.image = self.chef.world.image_class.chef_rb_img
+            else:
+                self.chef.image = self.chef.world.image_class.chef_ru_img
+        else:
+            if self.chef.location.get_xy()[1] <= self.chef.destination.get_xy()[1]:
+                self.chef.image = self.chef.world.image_class.chef_lb_img
+            else:
+                self.chef.image = self.chef.world.image_class.chef_lu_img
         
     def check_condition(self):
         if abs(self.chef.location - self.chef.destination) < 10:

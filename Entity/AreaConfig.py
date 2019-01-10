@@ -351,8 +351,7 @@ class AreaConfig:
         world.add(berry)
 
         # Create Main Tower
-        # main_tower = MainTower(world, image_class.main_tower_img, Vector2(2200, 1200))
-        main_tower = MainTower(world, image_class.main_tower_img, Vector2(2200, 400))
+        main_tower = MainTower(world, image_class.main_tower_img, Vector2(2200, 1200))
         world.add(main_tower)
 
         # house = House(world, image_class.house_img, Vector2(600, 650))
