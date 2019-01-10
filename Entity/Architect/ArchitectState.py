@@ -83,6 +83,19 @@ class ArchitectStateGoBuilding(State):
         State.__init__(self, "goBuilding")
         self.architect = architect
 
+    def do_action(self):
+        # Set architect Walk Image
+        if self.architect.location.get_xy()[0] < self.architect.destination.get_xy()[0]:
+            if self.architect.location.get_xy()[1] < self.architect.destination.get_xy()[1]:
+                self.architect.image = self.architect.world.image_class.architect_rb_img
+            else:
+                self.architect.image = self.architect.world.image_class.architect_ru_img
+        else:
+            if self.architect.location.get_xy()[1] <= self.architect.destination.get_xy()[1]:
+                self.architect.image = self.architect.world.image_class.architect_lb_img
+            else:
+                self.architect.image = self.architect.world.image_class.architect_lu_img
+
     def check_condition(self):
         if abs(self.architect.location - self.architect.destination) < 10:
             return "building"
