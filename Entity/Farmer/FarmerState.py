@@ -39,7 +39,7 @@ class FarmerStateGoCutting(State):
         else:
             stone = self.farmer.world.get_nearest_entity(self.farmer.location, "stone")
             if stone:
-                self.farmer.destination = stone.location + Vector2(randint(-50, 50), randint(-20, 50))
+                self.farmer.destination = stone.location + Vector2(randint(-30, 30), randint(-20, 30))
                 self.farmer.stone_id = stone.id
 
 
@@ -67,10 +67,10 @@ class FarmerStateCutting(State):
         if self.farmer.bear_load <= 0:
             return "returning"
         if self.farmer.forest_id:
-            if self.farmer.forest_id not in self.farmer.world.entity_group and self.farmer.bear_load > 0:
+            if self.farmer.forest_id not in self.farmer.world.entity_group:
                 return "goCutting"
-        if self.farmer.stone_id:
-            if self.farmer.stone_id not in self.farmer.world.entity_group and self.farmer.bear_load > 0:
+        elif self.farmer.stone_id:
+            if self.farmer.stone_id not in self.farmer.world.entity_group:
                 return "goCutting"
         return None
 
