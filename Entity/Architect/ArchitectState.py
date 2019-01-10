@@ -13,7 +13,10 @@ class ArchitectStateFree(State):
     def random_walk(self):
         x = randint(-50, 50)
         y = randint(-50, 50)
-        self.architect.destination = self.architect.location + Vector2(x, y)
+        random_destination = self.architect.location + Vector2(x, y)
+        world_w, world_h = self.architect.world.image_class.world_bg.get_size()
+        if 0 < random_destination.x - 10 < world_w and 0 < random_destination.y < world_h - 10:
+            self.architect.destination = random_destination
 
     def do_action(self):
         if abs(self.architect.location - self.architect.destination) < 5:

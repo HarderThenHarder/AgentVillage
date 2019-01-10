@@ -20,17 +20,18 @@ def main():
 
     # set Img
     image_class = ImageClass()
+    pygame.display.set_icon(image_class.farmer_rb_full_img)
 
     # Constant Value
     ORIGIN = (0, 0)
 
     # set Screen
     WHOLE_MAP_SIZE = [9600, 5400]
-    # WIDTH_HEIGHT = [1536, 864]
-    WIDTH_HEIGHT = [1920, 1080]
+    WIDTH_HEIGHT = [1536, 864]
+    # WIDTH_HEIGHT = [1920, 1080]
     os.environ['SDL_VIDEO_WINDOW_POS'] = "%d, %d" % (100, 50)
     screen = pygame.display.set_mode(WIDTH_HEIGHT, RESIZABLE, 32)
-    start_draw_pos = Vector2(0, 0)
+    start_draw_pos = Vector2(-1800, -800)
 
     # Create world
     world = World(image_class.world_bg, WIDTH_HEIGHT, image_class)

@@ -1,7 +1,5 @@
 from random import randint
-
 from Entity.Architect.Architect import Architect
-from Entity.Building.House import House
 from Entity.Building.MainTower import MainTower
 from Entity.Farmer.Farmer import Farmer
 from Entity.Flower import Flower
@@ -23,8 +21,6 @@ class AreaConfig:
         #     forest = Forest(world, image_class.forest_img, random_location)
         #     world.add(forest)
         #     print("forest = Forest(world, image_class.forest_img, %r)\nworld.add(forest)" % forest.location)
-        forest = Forest(world, image_class.forest_img, Vector2(730, 160))
-        world.add(forest)
         forest = Forest(world, image_class.forest_img, Vector2(1503, 3388))
         world.add(forest)
         forest = Forest(world, image_class.forest_img, Vector2(1000, 300))
@@ -353,7 +349,8 @@ class AreaConfig:
         berry = Flower(world, image_class.berry_img, Vector2(1107, 600))
         world.add(berry)
 
-        main_tower = MainTower(world, image_class.main_tower_img, Vector2(500, 500))
+        # Create Main Tower
+        main_tower = MainTower(world, image_class.main_tower_img, Vector2(2200, 1200))
         world.add(main_tower)
 
         # house = House(world, image_class.house_img, Vector2(600, 650))
