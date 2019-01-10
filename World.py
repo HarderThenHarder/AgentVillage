@@ -4,7 +4,7 @@ import pygame
 
 class World:
 
-    def __init__(self, world_bg, WIDTH_HEIGHT, image_class):
+    def __init__(self, world_bg, WIDTH_HEIGHT, image_class, WHOLE_MAP_SIZE):
         self.world_bg = world_bg
         self.entity_group = {}
         self.entity_id = 0
@@ -14,6 +14,7 @@ class World:
         self.rect_in_sub_map_width_height = []
         self.rect_in_sub_map_pos = []
         self.image_class = image_class
+        self.WHOLE_MAP_SIZE = WHOLE_MAP_SIZE
 
     def set_sub_map(self):
         sub_map_surface = pygame.Surface(self.sub_map_width_height)

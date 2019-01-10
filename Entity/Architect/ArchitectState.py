@@ -14,7 +14,7 @@ class ArchitectStateFree(State):
         x = randint(-50, 50)
         y = randint(-50, 50)
         random_destination = self.architect.location + Vector2(x, y)
-        world_w, world_h = self.architect.world.image_class.world_bg.get_size()
+        world_w, world_h = self.architect.world.WHOLE_MAP_SIZE
         if 0 < random_destination.x - 10 < world_w and 0 < random_destination.y < world_h - 10:
             self.architect.destination = random_destination
 
@@ -38,8 +38,8 @@ class ArchitectStateFree(State):
         house_number = self.architect.main_tower.get_building_entity_number("house")
         # house capacity is 10, need 500 wood & 200 stone to build house
         if house_number * 10 < len(self.architect.main_tower.people_list) and self.architect.main_tower.wood >= 200 and self.architect.main_tower.mine >= 200:
-            x_offset = randint(-self.architect.main_tower.territory_R, self.architect.main_tower.territory_R)
-            y_offset = randint(-self.architect.main_tower.territory_R, self.architect.main_tower.territory_R)
+            x_offset = randint(-self.architect.main_tower.territory_left, self.architect.main_tower.territory_right)
+            y_offset = randint(-self.architect.main_tower.territory_bottom, self.architect.main_tower.territory_up)
             new_house_location = Vector2(x_offset, y_offset) + self.architect.main_tower.location
             # don't build house out of map
             if new_house_location.x < 75 or new_house_location.y < 60:
@@ -47,7 +47,15 @@ class ArchitectStateFree(State):
             # don't build house over other house
             for building in self.architect.main_tower.building_list:
                 if building.is_over(new_house_location):
-                    self.architect.main_tower.territory_R += 50
+                    # expand territory
+                    if self.architect.main_tower.location.x - self.architect.main_tower.territory_left - 50 > 0:
+                        self.architect.main_tower.territory_left += 50
+                    if self.architect.main_tower.location.x + self.architect.main_tower.territory_right + 50 < self.architect.world.WHOLE_MAP_SIZE[0]:
+                        self.architect.main_tower.territory_right += 50
+                    if self.architect.main_tower.location.y - self.architect.main_tower.territory_up - 50 > 0:
+                        self.architect.main_tower.territory_up += 50
+                    if self.architect.main_tower.location.y + self.architect.main_tower.territory_bottom + 50 < self.architect.world.WHOLE_MAP_SIZE[1]:
+                        self.architect.main_tower.territory_bottom += 50
                     return None
             # random choose house image
             if randint(1, 10) <= 7:

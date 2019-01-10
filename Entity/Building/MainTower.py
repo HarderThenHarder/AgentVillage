@@ -14,7 +14,10 @@ class MainTower(GameEntity):
         self.wood = 1000
         self.mine = 1000
         self.food = 0
-        self.territory_R = 300
+        self.territory_up = 300
+        self.territory_bottom = 300
+        self.territory_left = 300
+        self.territory_right = 300
 
     def add(self, entity):
         self.people_list.append(entity)

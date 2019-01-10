@@ -99,7 +99,7 @@ class FarmerStateReturning(State):
                 self.farmer.image = self.farmer.world.image_class.farmer_lu_full_img
 
     def check_condition(self):
-        if abs(self.farmer.location - self.farmer.main_tower.location) < 50:
+        if abs(self.farmer.location - self.farmer.destination) < 50:
             return "goCutting"
 
     def entry_action(self):
