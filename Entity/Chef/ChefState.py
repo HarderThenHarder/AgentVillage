@@ -49,17 +49,6 @@ class ChefStateFree(State):
             # don't build house over other house
             for building in self.chef.main_tower.building_list:
                 if building.is_over(new_farmland_location):
-                    # expand territory
-                    if self.chef.main_tower.location.x - self.chef.main_tower.territory_left - 50 > 0:
-                        self.chef.main_tower.territory_left += 50
-                    if self.chef.main_tower.location.x + self.chef.main_tower.territory_right + 50 < \
-                            self.chef.world.WHOLE_MAP_SIZE[0]:
-                        self.chef.main_tower.territory_right += 50
-                    if self.chef.main_tower.location.y - self.chef.main_tower.territory_up - 50 > 0:
-                        self.chef.main_tower.territory_up += 50
-                    if self.chef.main_tower.location.y + self.chef.main_tower.territory_bottom + 50 < \
-                            self.chef.world.WHOLE_MAP_SIZE[1]:
-                        self.chef.main_tower.territory_bottom += 50
                     return None
             if randint(1, 10) <= 7:
                 new_farmland = Plantings(self.chef.world, self.chef.world.image_class.wheats_unfinished_img, new_farmland_location, 1)
