@@ -15,19 +15,9 @@ class SoldierStatePatrol(State):
                   randint(self.soldier.main_tower.territory_right - 30, self.soldier.main_tower.territory_right)]
         edge_y = [randint(-self.soldier.main_tower.territory_up, -self.soldier.main_tower.territory_up + 30),
                   randint(self.soldier.main_tower.territory_bottom - 30, self.soldier.main_tower.territory_bottom)]
-
         x = edge_x[randint(0, 1)]
         y = edge_y[randint(0, 1)]
         new_destination = Vector2(x, y) + self.soldier.main_tower.location
-        # don't walk out the map
-        # if new_destination.x < 10:
-        #     new_destination.x = 10
-        # elif new_destination.x > self.soldier.world.WHOLE_MAP_SIZE[0] - 10:
-        #     new_destination.x = self.soldier.world.WHOLE_MAP_SIZE[0] - 10
-        # if new_destination.y < 10:
-        #     new_destination.y = 10
-        # elif new_destination.y > self.soldier.world.WHOLE_MAP_SIZE[1] - 10:
-        #     new_destination.y = self.soldier.world.WHOLE_MAP_SIZE[1] - 10
         self.soldier.destination = new_destination
 
     def do_action(self):

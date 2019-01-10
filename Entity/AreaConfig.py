@@ -1,4 +1,5 @@
 from random import randint
+from Entity.Chef.Chef import Chef
 from Entity.Architect.Architect import Architect
 from Entity.Building.MainTower import MainTower
 from Entity.Farmer.Farmer import Farmer
@@ -350,7 +351,8 @@ class AreaConfig:
         world.add(berry)
 
         # Create Main Tower
-        main_tower = MainTower(world, image_class.main_tower_img, Vector2(2200, 1200))
+        # main_tower = MainTower(world, image_class.main_tower_img, Vector2(2200, 1200))
+        main_tower = MainTower(world, image_class.main_tower_img, Vector2(2200, 400))
         world.add(main_tower)
 
         # house = House(world, image_class.house_img, Vector2(600, 650))
@@ -385,3 +387,12 @@ class AreaConfig:
             main_tower.add(architect)
             architect.brain.set_state("free")
             world.add(architect)
+
+        # Create Chef
+        x = randint(-50, 50)
+        y = randint(-50, 50)
+        random_location = main_tower.location + Vector2(x, y)
+        chef = Chef(world, image_class.chef_lb_img, random_location)
+        main_tower.add(chef)
+        chef.brain.set_state("free")
+        world.add(chef)

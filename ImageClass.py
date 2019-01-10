@@ -41,8 +41,22 @@ class ImageClass:
         self.architect_lu_img = pygame.transform.scale(pygame.image.load(r"img\architect\architect_lu.png"), (30, 30))
         self.architect_rb_img = pygame.transform.scale(pygame.image.load(r"img\architect\architect_rb.png"), (30, 30))
         self.architect_ru_img = pygame.transform.scale(pygame.image.load(r"img\architect\architect_ru.png"), (30, 30))
-        self.architect_work_img = pygame.transform.scale(pygame.image.load(r"img\architect\architect_work.png"),
-                                                         (30, 30))
+        self.architect_work_img = pygame.transform.scale(pygame.image.load(r"img\architect\architect_work.png"), (30, 30))
+
+        # chef
+        self.chef_lb_img = pygame.transform.scale(pygame.image.load(r"img\chef\chef_lb.png"), (30, 30))
+        self.chef_lu_img = pygame.transform.scale(pygame.image.load(r"img\chef\chef_lu.png"), (30, 30))
+        self.chef_rb_img = pygame.transform.scale(pygame.image.load(r"img\chef\chef_rb.png"), (30, 30))
+        self.chef_ru_img = pygame.transform.scale(pygame.image.load(r"img\chef\chef_ru.png"), (30, 30))
+        self.chef_work_img = pygame.transform.scale(pygame.image.load(r"img\chef\chef_work.png"), (30, 30))
 
         # main tower
         self.main_tower_img = pygame.transform.scale(pygame.image.load(r"img\building\tower.png"), (60, 100))
+
+        # Wheats
+        self.wheats_unfinished_img = pygame.transform.scale(pygame.image.load(r"img\plants\wheats_unfinished.png"), (100, 100))
+        self.wheats_img = pygame.transform.scale(pygame.image.load(r"img\plants\wheats.png"), (100, 100))
+
+        # Carrots
+        self.carrots_unfinished_img = pygame.transform.scale(pygame.image.load(r"img\plants\carrots_unfinished.png"), (100, 100))
+        self.carrots_img = pygame.transform.scale(pygame.image.load(r"img\plants\carrots.png"), (100, 100))

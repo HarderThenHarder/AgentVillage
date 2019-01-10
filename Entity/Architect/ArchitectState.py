@@ -15,6 +15,7 @@ class ArchitectStateFree(State):
         y = randint(-50, 50)
         random_destination = self.architect.location + Vector2(x, y)
         world_w, world_h = self.architect.world.WHOLE_MAP_SIZE
+        # don't walk out of world
         if 0 < random_destination.x - 10 < world_w and 0 < random_destination.y < world_h - 10:
             self.architect.destination = random_destination
 
@@ -42,7 +43,8 @@ class ArchitectStateFree(State):
             y_offset = randint(-self.architect.main_tower.territory_bottom, self.architect.main_tower.territory_up)
             new_house_location = Vector2(x_offset, y_offset) + self.architect.main_tower.location
             # don't build house out of map
-            if new_house_location.x < 75 or new_house_location.y < 60:
+            if new_house_location.x < 75 or new_house_location.x > self.architect.world.WHOLE_MAP_SIZE[0] - 75 or \
+                    new_house_location.y < 60 or new_house_location.y > self.architect.world.WHOLE_MAP_SIZE[1] - 60:
                 return None
             # don't build house over other house
             for building in self.architect.main_tower.building_list:

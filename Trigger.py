@@ -42,3 +42,27 @@ class Trigger:
                     main_tower.add(soldier)
                     soldier.brain.set_state("patrol")
                     world.add(soldier)
+
+    @staticmethod
+    def strike_hungry_people_event(main_tower, world):
+        if main_tower.food == 0:
+            if randint(1, 50) == 1:
+                random_idx = randint(0, len(main_tower.people_list) - 1)
+                dead_people = main_tower.people_list[random_idx]
+                world.remove(dead_people.id)
+                del main_tower.people_list[random_idx]
+
+    @staticmethod
+    def strike_remove_farmland_event(main_tower, world):
+        if main_tower.food == 0:
+            number_of_farm_land = 0
+        else:
+            number_of_farm_land = main_tower.food // 200 + 1
+        actually_farm_land = main_tower.get_building_entity_number("planting")
+        need_to_remove_number = int(actually_farm_land - number_of_farm_land)
+        farmland_list = main_tower.get_building_entity_list("planting")
+        for i in range(need_to_remove_number):
+            farmland_to_remove = farmland_list[i]
+            world.remove(farmland_to_remove.id)
+            main_tower.building_list.remove(farmland_to_remove)
+
