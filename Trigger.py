@@ -78,7 +78,7 @@ class Trigger:
 
     @staticmethod
     def strike_generate_wolf_event(main_tower, world):
-        if randint(1, 100) == 1:
+        if randint(1, 1000) == 1:
             nearest_forest = world.get_nearest_entity(main_tower.location, "forest")
             wolf = Wolf(world, nearest_forest.location, nearest_forest)
             wolf.brain.set_state("hiding")
