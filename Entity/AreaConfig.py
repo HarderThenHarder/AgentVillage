@@ -58,8 +58,6 @@ class AreaConfig:
         world.add(forest)
         forest = Forest(world, image_class.forest_img, Vector2(6034, 611))
         world.add(forest)
-        forest = Forest(world, image_class.forest_img, Vector2(1442, 3443))
-        world.add(forest)
         forest = Forest(world, image_class.forest_img, Vector2(7126, 1274))
         world.add(forest)
         forest = Forest(world, image_class.forest_img, Vector2(3699, 1328))
