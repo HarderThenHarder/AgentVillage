@@ -50,6 +50,12 @@ class ImageClass:
         self.chef_ru_img = pygame.transform.scale(pygame.image.load(r"img\chef\chef_ru.png"), (30, 30))
         self.chef_work_img = pygame.transform.scale(pygame.image.load(r"img\chef\chef_work.png"), (30, 30))
 
+        # wolf
+        self.wolf_lb_img = pygame.transform.scale(pygame.image.load(r"img\wolf\wolf_lb.png"), (30, 30))
+        self.wolf_lu_img = pygame.transform.scale(pygame.image.load(r"img\wolf\wolf_lu.png"), (30, 30))
+        self.wolf_rb_img = pygame.transform.scale(pygame.image.load(r"img\wolf\wolf_rb.png"), (30, 30))
+        self.wolf_ru_img = pygame.transform.scale(pygame.image.load(r"img\wolf\wolf_ru.png"), (30, 30))
+
         # main tower
         self.main_tower_img = pygame.transform.scale(pygame.image.load(r"img\building\tower.png"), (60, 100))
 

@@ -1,5 +1,6 @@
 from Pencil import Pencil
 import pygame
+from Timer import Timer
 
 
 class World:
@@ -15,6 +16,7 @@ class World:
         self.rect_in_sub_map_pos = []
         self.image_class = image_class
         self.WHOLE_MAP_SIZE = WHOLE_MAP_SIZE
+        self.timer = Timer()
 
     def set_sub_map(self):
         sub_map_surface = pygame.Surface(self.sub_map_width_height)
@@ -56,10 +58,10 @@ class World:
                                     self.WIDTH_HEIGHT[1] - self.sub_map_width_height[1] + int(
                                         abs(start_draw_pos[1]) / 5400 * self.sub_map_width_height[1])]
         self.WIDTH_HEIGHT = WIDTH_HEIGHT
-
         time_passed = time_passed
         for entity in list(self.entity_group.values()):
             entity.process(time_passed)
+        self.timer.update_timer(time_passed)
 
     def get_nearest_entity(self, location, name):
         location = location.copy()
@@ -72,3 +74,10 @@ class World:
                     min_d = distance
                     nearest_entity = entity
         return nearest_entity
+
+    def get_entity_number(self, name):
+        number = 0
+        for entity in self.entity_group.values():
+            if entity.name == name:
+                number += 1
+        return number

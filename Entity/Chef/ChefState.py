@@ -37,8 +37,8 @@ class ChefStateFree(State):
 
     def check_condition(self):
         # 10 people need one farmland
-        farm_land_number = self.chef.main_tower.get_building_entity_number("planting")
-        if farm_land_number < len(self.chef.main_tower.people_list) // 10:
+        farm_land_number = self.chef.world.get_entity_number("planting")
+        if farm_land_number * 10 < len(self.chef.main_tower.people_list):
             x_offset = randint(-self.chef.main_tower.territory_left, self.chef.main_tower.territory_right)
             y_offset = randint(-self.chef.main_tower.territory_bottom, self.chef.main_tower.territory_up)
             new_farmland_location = Vector2(x_offset, y_offset) + self.chef.main_tower.location

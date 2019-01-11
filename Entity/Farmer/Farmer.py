@@ -8,7 +8,7 @@ class Farmer(GameEntity):
     def __init__(self, world, farmer_image, location):
         GameEntity.__init__(self, "farmer", world, farmer_image)
         self.location = location
-        self.color = (200, 0, 0)
+        self.color = (0, 0, 200)
         self.brain = StateMachine()
         self.forest_id = None
         self.stone_id = None
@@ -22,6 +22,7 @@ class Farmer(GameEntity):
         self.brain.add_state(stateReturning)
         self.time_passed = 0
         self.main_tower = None
+        self.hp = 10
 
     def render(self, surface, start_draw_pos):
         GameEntity.render(self, surface, start_draw_pos)
@@ -29,3 +30,10 @@ class Farmer(GameEntity):
     def process(self, time_passed):
         GameEntity.process(self, time_passed)
         self.time_passed = time_passed
+
+    def bitten(self):
+        self.hp -= 1
+        if self.hp <= 0:
+            self.world.remove(self.id)
+            self.main_tower.people_list.remove(self)
+            del self

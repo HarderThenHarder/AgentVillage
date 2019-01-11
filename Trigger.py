@@ -4,6 +4,7 @@ from Entity.Architect.Architect import Architect
 from Entity.Chef.Chef import Chef
 from Entity.Farmer.Farmer import Farmer
 from Entity.Sodier.Sodier import Soldier
+from Entity.Wolf.Wolf import Wolf
 from Vector2 import Vector2
 
 
@@ -49,7 +50,7 @@ class Trigger:
                     random_location = main_tower.location + Vector2(x, y)
                     chef = Chef(world, world.image_class.chef_rb_img, random_location)
                     main_tower.add(chef)
-                    chef.brain.set_state("patrol")
+                    chef.brain.set_state("free")
                     world.add(chef)
 
     @staticmethod
@@ -74,4 +75,12 @@ class Trigger:
             farmland_to_remove = farmland_list[i]
             world.remove(farmland_to_remove.id)
             main_tower.building_list.remove(farmland_to_remove)
+
+    @staticmethod
+    def strike_generate_wolf_event(main_tower, world):
+        if randint(1, 100) == 1:
+            nearest_forest = world.get_nearest_entity(main_tower.location, "forest")
+            wolf = Wolf(world, nearest_forest.location, nearest_forest)
+            wolf.brain.set_state("hiding")
+            world.add(wolf)
 
