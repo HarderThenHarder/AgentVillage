@@ -1,6 +1,7 @@
 from Pencil import Pencil
 import pygame
 from Timer import Timer
+from Vector2 import Vector2
 
 
 class World:
@@ -34,21 +35,30 @@ class World:
 
     def render(self, screen, start_draw_pos):
         screen.blit(self.world_bg, start_draw_pos)
-
         # Draw Entity && sort the entity by their y position
         for tuple_element in sorted(self.entity_group.items(), key=lambda item: item[1].location.get_xy()[1]):
             entity = tuple_element[1]
             entity.render(screen, start_draw_pos)
-            # draw entity on sub map
-            if entity.color:
-                x, y = entity.location.get_xy()
-                entity_in_sub_map_rect = [int(x / 9600 * self.sub_map_width_height[0]),
-                                          self.WIDTH_HEIGHT[1] - self.sub_map_width_height[1] + int(
-                                              y / 5400 * self.sub_map_width_height[1]), 3, 3]
-                Pencil.draw_rect(screen, entity_in_sub_map_rect, entity.color)
         # Draw Sub Map
         screen.blit(self.sub_map_surface, (0, self.WIDTH_HEIGHT[1] - self.sub_map_width_height[1]))
         Pencil.draw_rect(screen, [*self.rect_in_sub_map_pos, *self.rect_in_sub_map_width_height], (200, 200, 200), 1)
+        # Write State of Main Tower.
+        main_tower = self.get_nearest_entity(Vector2(0, 0), "main_tower")
+        Pencil.write_text(screen, "wood:%d" % main_tower.wood, [0, 0], 15, color=(255, 255, 255))
+        Pencil.write_text(screen, "food:%d" % main_tower.food, [0, 15], 15, color=(255, 255, 255))
+        Pencil.write_text(screen, "mine:%d" % main_tower.mine, [0, 30], 15, color=(255, 255, 255))
+        Pencil.write_text(screen, "farmland:%d" % main_tower.get_building_entity_number("planting"), [0, 45], 15,
+                          color=(255, 255, 255))
+        Pencil.write_text(screen, "population:%d" % len(main_tower.people_list), [0, 60], 15,
+                          color=(255, 255, 255))
+        Pencil.write_text(screen, "[%02d:%02d:%02d]" % (self.timer.get_hour(), self.timer.get_minute(), self.timer.get_second()), [0, 75], 15, color=(255, 255, 255))
+        # Draw entity on Sub Map
+        for entity in self.entity_group.values():
+            if entity.color:
+                x, y = entity.location.get_xy()
+                entity_in_sub_map_rect = [int(x / 9600 * self.sub_map_width_height[0]),
+                                          self.WIDTH_HEIGHT[1] - self.sub_map_width_height[1] + int(y / 5400 * self.sub_map_width_height[1]), 3, 3]
+                Pencil.draw_rect(screen, entity_in_sub_map_rect, entity.color)
 
     def process(self, start_draw_pos, WIDTH_HEIGHT, time_passed):
         # Update the rect pos in sub map

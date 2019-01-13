@@ -30,8 +30,9 @@ class Wolf(GameEntity):
     def process(self, time_passed):
         GameEntity.process(self, time_passed)
         self.time_passed = time_passed
-        if self.forest.id not in self.world.entity_group:
-            self.forest = self.world.get_nearest_entity(self.location, "forest")
+        if self.forest:
+            if self.forest.id not in self.world.entity_group:
+                self.forest = self.world.get_nearest_entity(self.location, "forest")
 
     def bitten(self):
         self.hp -= 1

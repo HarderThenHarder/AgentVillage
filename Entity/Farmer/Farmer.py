@@ -23,6 +23,7 @@ class Farmer(GameEntity):
         self.time_passed = 0
         self.main_tower = None
         self.hp = 10
+        self.stopped_time = 0
 
     def render(self, surface, start_draw_pos):
         GameEntity.render(self, surface, start_draw_pos)

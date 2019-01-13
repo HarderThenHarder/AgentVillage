@@ -76,14 +76,6 @@ class MainTower(GameEntity):
         Pencil.write_text(surface, "wood:%d" % self.wood, [text_x, text_y], 13, color=(200, 200, 200))
         Pencil.write_text(surface, "food:%d" % self.food, [text_x, text_y + 13], 13, color=(200, 200, 200))
         Pencil.write_text(surface, "mine:%d" % self.mine, [text_x, text_y + 26], 13, color=(200, 200, 200))
-        # Write State of Main Tower
-        Pencil.write_text(surface, "wood:%d" % self.wood, [0, 0], 15, color=(255, 255, 255))
-        Pencil.write_text(surface, "food:%d" % self.food, [0, 15], 15, color=(255, 255, 255))
-        Pencil.write_text(surface, "mine:%d" % self.mine, [0, 30], 15, color=(255, 255, 255))
-        Pencil.write_text(surface, "farmland:%d" % self.get_building_entity_number("planting"), [0, 45], 15, color=(255, 255, 255))
-        Pencil.write_text(surface, "population:%d" % len(self.people_list), [0, 60], 15, color=(255, 255, 255))
-        Pencil.write_text(surface, "[%02d:%02d:%02d]" % (self.world.timer.get_hour(), self.world.timer.get_minute(), self.world.timer.get_second()),
-                          [0, 75], 15, color=(255, 255, 255))
         # Pencil.draw_rect(surface, [start_draw_pos[0] + self.location.get_xy()[0] - self.territory_left,
         #                            start_draw_pos[1] + self.location.get_xy()[1] - self.territory_up,
         #                            self.territory_left + self.territory_right, self.territory_up * self.territory_bottom],

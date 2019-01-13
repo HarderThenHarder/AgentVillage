@@ -40,7 +40,7 @@ def main():
     area_config = AreaConfig(world, WHOLE_MAP_SIZE, image_class)
 
     while True:
-        time_passed = clock.tick(30)
+        time_passed = clock.tick(30) * 1
 
         for event in pygame.event.get():
             if event.type == QUIT:
