@@ -89,7 +89,7 @@ class WolfStateAttacking(State):
         return None
 
     def entry_action(self):
-        self.wolf.speed = 40
+        self.wolf.speed = 70
         self.wolf.attack_people = self.wolf.attack_main_tower.get_nearest_people(self.wolf.location)
         self.wolf.destination = self.wolf.attack_people.location - Vector2(10, 10)
 

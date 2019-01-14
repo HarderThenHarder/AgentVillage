@@ -42,6 +42,14 @@ class World:
         # Draw Sub Map
         screen.blit(self.sub_map_surface, (0, self.WIDTH_HEIGHT[1] - self.sub_map_width_height[1]))
         Pencil.draw_rect(screen, [*self.rect_in_sub_map_pos, *self.rect_in_sub_map_width_height], (200, 200, 200), 1)
+        # Draw entity on Sub Map
+        for entity in self.entity_group.values():
+            if entity.color:
+                x, y = entity.location.get_xy()
+                entity_in_sub_map_rect = [int(x / 9600 * self.sub_map_width_height[0]),
+                                          self.WIDTH_HEIGHT[1] - self.sub_map_width_height[1] + int(
+                                              y / 5400 * self.sub_map_width_height[1]), 3, 3]
+                Pencil.draw_rect(screen, entity_in_sub_map_rect, entity.color)
         # Write State of Main Tower.
         main_tower = self.get_nearest_entity(Vector2(0, 0), "main_tower")
         Pencil.write_text(screen, "wood:%d" % main_tower.wood, [0, 0], 15, color=(255, 255, 255))
@@ -52,13 +60,6 @@ class World:
         Pencil.write_text(screen, "population:%d" % len(main_tower.people_list), [0, 60], 15,
                           color=(255, 255, 255))
         Pencil.write_text(screen, "[%02d:%02d:%02d]" % (self.timer.get_hour(), self.timer.get_minute(), self.timer.get_second()), [0, 75], 15, color=(255, 255, 255))
-        # Draw entity on Sub Map
-        for entity in self.entity_group.values():
-            if entity.color:
-                x, y = entity.location.get_xy()
-                entity_in_sub_map_rect = [int(x / 9600 * self.sub_map_width_height[0]),
-                                          self.WIDTH_HEIGHT[1] - self.sub_map_width_height[1] + int(y / 5400 * self.sub_map_width_height[1]), 3, 3]
-                Pencil.draw_rect(screen, entity_in_sub_map_rect, entity.color)
 
     def process(self, start_draw_pos, WIDTH_HEIGHT, time_passed):
         # Update the rect pos in sub map
