@@ -2,6 +2,7 @@ from Pencil import Pencil
 import pygame
 from Timer import Timer
 from Vector2 import Vector2
+import matplotlib.pyplot as plt
 
 
 class World:
@@ -18,6 +19,37 @@ class World:
         self.image_class = image_class
         self.WHOLE_MAP_SIZE = WHOLE_MAP_SIZE
         self.timer = Timer()
+        self.wood_history = []
+        self.mine_history = []
+        self.population_history = []
+        self.food_history = []
+        self.update_state_window_frequency = 100
+        self.update_state_window_step = 0
+        self.set_plt()
+
+    def set_plt(self):
+        plt.ion()
+        plt.rcParams['font.sans-serif'] = ['SimHei']
+        plt.rcParams['axes.unicode_minus'] = False
+        plt.rcParams['lines.linewidth'] = 1
+        plt.style.use("ggplot")
+        plt.rcParams['figure.figsize'] = (5, 5)
+        fig = plt.gcf()
+        fig.canvas.set_window_title("Stone Age State History")
+
+    def update_state_window(self):
+        plt.clf()
+        plt.suptitle("World State")
+        gragh = plt.subplot(1, 1, 1)
+        gragh.set_xlabel("Time Elapsed(ticks)")
+        gragh.set_ylabel("Values")
+        gragh.plot(self.food_history, label="Food", linestyle='--', color='orange')
+        gragh.plot(self.wood_history, label="Wood", linestyle='--', color='purple')
+        gragh.plot(self.mine_history, label="Mine", linestyle='--', color='c')
+        gragh.plot(self.population_history, label="Population", color='r')
+        self.update_state_window_step = 0
+        plt.legend(loc='upper left')
+        plt.pause(0.001)
 
     def set_sub_map(self):
         sub_map_surface = pygame.Surface(self.sub_map_width_height)
@@ -50,6 +82,7 @@ class World:
                                           self.WIDTH_HEIGHT[1] - self.sub_map_width_height[1] + int(
                                               y / 5400 * self.sub_map_width_height[1]), 3, 3]
                 Pencil.draw_rect(screen, entity_in_sub_map_rect, entity.color)
+
         # Write State of Main Tower.
         main_tower = self.get_nearest_entity(Vector2(0, 0), "main_tower")
         Pencil.write_text(screen, "wood:%d" % main_tower.wood, [0, 0], 15, color=(255, 255, 255))
@@ -60,6 +93,17 @@ class World:
         Pencil.write_text(screen, "population:%d" % len(main_tower.people_list), [0, 60], 15,
                           color=(255, 255, 255))
         Pencil.write_text(screen, "[%02d:%02d:%02d]" % (self.timer.get_hour(), self.timer.get_minute(), self.timer.get_second()), [0, 75], 15, color=(255, 255, 255))
+
+        # Update the World State Window
+        if self.update_state_window_step % self.update_state_window_frequency == 0:
+            self.food_history.append(main_tower.food)
+            self.wood_history.append(main_tower.wood)
+            self.mine_history.append(main_tower.mine)
+            self.population_history.append(len(main_tower.people_list))
+            self.update_state_window()
+
+        self.update_state_window_step += 1
+
 
     def process(self, start_draw_pos, WIDTH_HEIGHT, time_passed):
         # Update the rect pos in sub map
