@@ -50,7 +50,7 @@ main Main.py
 
 GameEntity 是场景中所有对象的基类，场景中任何一个对象在定义时都需要继承自该类：
 
-<div align=center><img src="assets/Entity.png" width=400></div>
+<div align=center><img src="assets/entity.png" width=400></div>
 
 2. **Agent Entity**
 
